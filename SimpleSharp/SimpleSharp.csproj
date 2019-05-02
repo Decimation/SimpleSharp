@@ -11,6 +11,7 @@
     <AssemblyName>SimpleSharp</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -43,7 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arrays.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="CollectionsToString.cs" />
     <Compile Include="ConsoleTable.cs" />
     <Compile Include="Diagnostics\Conditions.cs" />
