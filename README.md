@@ -4,7 +4,7 @@
 
 ![Icon](https://github.com/Decimation/SimpleSharp/raw/master/icon64.png)
 
-C# common library
+C# common library. This is the supersedes `RazorCommon`.
 
 # License
 
