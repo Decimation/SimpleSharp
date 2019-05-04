@@ -24,7 +24,6 @@ namespace SimpleSharp.Extensions
 			return list;
 		}*/
 
-
 		public static T Random<T>(this IEnumerable<T> ls) => Arrays.Random(ls.ToArray());
 		
 		/// <summary>

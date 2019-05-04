@@ -80,6 +80,11 @@ namespace SimpleSharp.Extensions
 			}
 		}
 
+		public static string Split(this string value, string s)
+		{
+			return value.Split(new[] {s}, StringSplitOptions.None)[0];
+		}
+
 		public static bool IsInterned(this string text)
 		{
 			return String.IsInterned(text) != null;

@@ -1,7 +1,15 @@
+#region
+
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Text;
 using JetBrains.Annotations;
+using SimpleSharp.Extensions;
+
+#endregion
 
 // ReSharper disable ParameterOnlyUsedForPreconditionCheck.Global
 // ReSharper disable UnusedMember.Global
@@ -37,20 +45,56 @@ namespace SimpleSharp.Diagnostics
 			return sb.ToString();
 		}
 
+		private static string GetFailedExpression()
+		{
+			// Skip to failed method
+			var frame      = new StackFrame(2, true);
+			var prevMethod = frame.GetMethod();
+			var ln         = frame.GetFileLineNumber();
+			var f          = frame.GetFileName();
+
+			// ReSharper disable once AssignNullToNotNullAttribute
+			var src = new FileInfo(f);
+
+			string argSrc;
+
+			using (var txt = src.OpenText()) {
+				for (int i = 0; i < ln - 1; i++) {
+					txt.ReadLine();
+				}
+
+
+				string callLine = txt.ReadLine();
+				argSrc = callLine.SubstringBetween("(", ")");
+			}
+
+			return argSrc;
+		}
+
+		[ContractAnnotation(COND_FALSE_HALT)]
+		public static void SmartAssert(bool condition)
+		{
+			if (!condition) {
+				string src = GetFailedExpression();
+				string msg = String.Format("Assertion failed. Argument: \"{0}\"", src);
+				throw new ArgumentException(msg);
+			}
+		}
+
 		#region NotNull
 
 		private const string NULL_FAIL = "Value cannot be null";
 
 		[StringFormatMethod(STRING_FMT_ARG)]
-		private static string NullMessage(string message = null, params object[] args) =>
-			CreateErrorString(NULL_FAIL, message, args);
+		private static string NullMessage(string message = null, params object[] args)
+			=> CreateErrorString(NULL_FAIL, message, args);
 
 		/// <summary>
-		/// Checks whether <paramref name="value"/> is <c>null</c>
-		/// <remarks>
-		/// If <typeparamref name="T"/> is a value type, this method checks whether <paramref name="value"/> is
-		/// <c>default</c>
-		/// </remarks>
+		///     Checks whether <paramref name="value" /> is <c>null</c>
+		///     <remarks>
+		///         If <typeparamref name="T" /> is a value type, this method checks whether <paramref name="value" /> is
+		///         <c>default</c>
+		///     </remarks>
 		/// </summary>
 		[ContractAnnotation(VALUE_NULL_HALT)]
 		public static void NotNull<T>(T value, string name)
@@ -72,7 +116,7 @@ namespace SimpleSharp.Diagnostics
 		}
 
 		/// <summary>
-		/// Checks whether <paramref name="value"/> is <see cref="IntPtr.Zero"/>
+		///     Checks whether <paramref name="value" /> is <see cref="IntPtr.Zero" />
 		/// </summary>
 		[ContractAnnotation(VALUE_NULL_HALT)]
 		public static void NotNull(IntPtr value, string name)
@@ -83,7 +127,7 @@ namespace SimpleSharp.Diagnostics
 		}
 
 		/// <summary>
-		/// Checks whether <paramref name="value"/> is <c>null</c>
+		///     Checks whether <paramref name="value" /> is <c>null</c>
 		/// </summary>
 		[ContractAnnotation(VALUE_NULL_HALT)]
 		public static unsafe void NotNull(void* value, string name)
@@ -96,12 +140,12 @@ namespace SimpleSharp.Diagnostics
 		private const string PRECONDITION_FAIL = "Precondition failed";
 
 		[StringFormatMethod(STRING_FMT_ARG)]
-		private static string RequireMessage(string message = null, params object[] args) =>
-			CreateErrorString(PRECONDITION_FAIL, message, args);
+		private static string RequireMessage(string message = null, params object[] args)
+			=> CreateErrorString(PRECONDITION_FAIL, message, args);
 
 
 		/// <summary>
-		/// Specifies a precondition
+		///     Specifies a precondition
 		/// </summary>
 		[ContractAnnotation(COND_FALSE_HALT)]
 		public static void Require(bool condition)
@@ -112,7 +156,7 @@ namespace SimpleSharp.Diagnostics
 		}
 
 		/// <summary>
-		/// Specifies a precondition for a parameter
+		///     Specifies a precondition for a parameter
 		/// </summary>
 		[ContractAnnotation(COND_FALSE_HALT)]
 		public static void Require(bool condition, string param)
@@ -123,7 +167,7 @@ namespace SimpleSharp.Diagnostics
 		}
 
 		/// <summary>
-		/// Specifies a precondition for a parameter
+		///     Specifies a precondition for a parameter
 		/// </summary>
 		[ContractAnnotation(COND_FALSE_HALT)]
 		public static void Require(bool condition, string message, string param)
@@ -140,11 +184,11 @@ namespace SimpleSharp.Diagnostics
 		private const string POSTCONDITION_FAIL = "Postcondition failed";
 
 		[StringFormatMethod(STRING_FMT_ARG)]
-		private static string EnsureMessage(string message = null, params object[] args) =>
-			CreateErrorString(POSTCONDITION_FAIL, message, args);
+		private static string EnsureMessage(string message = null, params object[] args)
+			=> CreateErrorString(POSTCONDITION_FAIL, message, args);
 
 		/// <summary>
-		/// Specifies a postcondition
+		///     Specifies a postcondition
 		/// </summary>
 		[ContractAnnotation(COND_FALSE_HALT)]
 		public static void Ensure(bool condition)
@@ -155,7 +199,7 @@ namespace SimpleSharp.Diagnostics
 		}
 
 		/// <summary>
-		/// Specifies a postcondition for a parameter
+		///     Specifies a postcondition for a parameter
 		/// </summary>
 		[ContractAnnotation(COND_FALSE_HALT)]
 		public static void Ensure(bool condition, string param)
@@ -166,7 +210,7 @@ namespace SimpleSharp.Diagnostics
 		}
 
 		/// <summary>
-		/// Specifies a postcondition for a parameter
+		///     Specifies a postcondition for a parameter
 		/// </summary>
 		[ContractAnnotation(COND_FALSE_HALT)]
 		public static void Ensure(bool condition, string message, string param)
@@ -184,8 +228,8 @@ namespace SimpleSharp.Diagnostics
 		private const string DEBUG_CONDITIONAL = "DEBUG";
 
 		[StringFormatMethod(STRING_FMT_ARG)]
-		private static string AssertionMessage(string message = null, params object[] args) =>
-			CreateErrorString(ASSERTION_FAIL, message, args);
+		private static string AssertionMessage(string message = null, params object[] args)
+			=> CreateErrorString(ASSERTION_FAIL, message, args);
 
 
 		[ContractAnnotation(COND_FALSE_HALT)]

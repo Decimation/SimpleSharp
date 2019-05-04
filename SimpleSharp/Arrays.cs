@@ -16,9 +16,6 @@ namespace SimpleSharp
 
 		public static T[] Add<T>(T[] arr, T value) => arr.Append(value).ToArray();
 
-		public static void Add<T>(ref T[] arr, T value)
-			=> arr = TransientOperate(arr, list => list.Add(value));
-
 		public static void OrderBy<TSource, TKey>(ref TSource[] arr, Func<TSource, TKey> order)
 		{
 			arr = arr.OrderBy(order).ToArray();

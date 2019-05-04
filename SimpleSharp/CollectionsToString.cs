@@ -130,15 +130,7 @@ namespace SimpleSharp
 
 		private static string CreateStringElement(object value, FormatOptions options)
 		{
-			string s;
-			if (options.HasFlagFast(FormatOptions.HEX)) {
-				s = Hex.TryCreateHex(value, options);
-			}
-			else {
-				s = value.ToString();
-			}
-
-			return s;
+			return options.HasFlagFast(FormatOptions.HEX) ? Hex.TryCreateHex(value, options) : value.ToString();
 		}
 
 		public static string CreateString(IEnumerable value, FormatOptions options)

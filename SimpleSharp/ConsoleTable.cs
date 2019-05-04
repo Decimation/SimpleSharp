@@ -271,23 +271,23 @@ namespace SimpleSharp
 			return columnLengths;
 		}
 
-		public void Write(Format format = SimpleSharp.Format.Default)
+		public void Write(TableFormat tableFormat = TableFormat.Default)
 		{
-			switch (format) {
-				case SimpleSharp.Format.Default:
+			switch (tableFormat) {
+				case SimpleSharp.TableFormat.Default:
 					Console.WriteLine(ToString());
 					break;
-				case SimpleSharp.Format.MarkDown:
+				case SimpleSharp.TableFormat.MarkDown:
 					Console.WriteLine(ToMarkDownString());
 					break;
-				case SimpleSharp.Format.Alternative:
+				case SimpleSharp.TableFormat.Alternative:
 					Console.WriteLine(ToStringAlternative());
 					break;
-				case SimpleSharp.Format.Minimal:
+				case SimpleSharp.TableFormat.Minimal:
 					Console.WriteLine(ToMinimalString());
 					break;
 				default:
-					throw new ArgumentOutOfRangeException(nameof(format), format, null);
+					throw new ArgumentOutOfRangeException(nameof(tableFormat), tableFormat, null);
 			}
 		}
 
@@ -308,7 +308,7 @@ namespace SimpleSharp
 		public bool                EnableCount { get; set; } = false;
 	}
 
-	public enum Format
+	public enum TableFormat
 	{
 		Default     = 0,
 		MarkDown    = 1,
