@@ -41,10 +41,12 @@ namespace SimpleSharp
 			return this;
 		}
 
+
 		public ConsoleTable Attach(int columnIndex, object column, params object[] rowColumn)
 		{
 			if (rowColumn.Length != Rows.Count) {
 				throw new ArgumentOutOfRangeException(CreateOutOfRangeMessage(rowColumn.Length, Rows.Count));
+				//AddRow(rowColumn);
 			}
 
 			Columns.Insert(columnIndex, column);
@@ -70,7 +72,7 @@ namespace SimpleSharp
 		{
 			return Attach(0, column, rowColumn);
 		}
-		
+
 		public ConsoleTable AttachEnd(object column, params object[] rowColumn)
 		{
 			return Attach(Columns.Count, column, rowColumn);
@@ -90,10 +92,51 @@ namespace SimpleSharp
 			return this;
 		}
 
+		public ConsoleTable SortNatural(string columnName)
+		{
+			int colIndex = Columns.IndexOf(columnName);
+			
+			if (colIndex == -1) {
+				throw new IndexOutOfRangeException($"Column \"{columnName}\" not found");
+			}
+			
+			var result = Rows.OrderBy(row => row[colIndex]).ToArray();
+			
+			Rows.Clear();
+			
+			foreach (object[] o in result) {
+				
+				Rows.Add(o);
+			}
+
+			return this;
+		}
+
+		/// <summary>
+		/// <para>Key: Name of column</para>
+		/// <para>Value: Value of column</para>
+		/// </summary>
+		public ConsoleTable AddRowPairs(KeyValuePair<string, object>[] kvs)
+		{
+			object[] rg = new object[Columns.Count];
+
+
+			for (int i = 0; i < kvs.Length; i++) {
+				var kv = kvs[i];
+				rg[Columns.IndexOf(kv.Key)] = kv.Value;
+			}
+
+			AddRow(rg);
+
+
+			return this;
+		}
+
 		private static string CreateOutOfRangeMessage(int colCnt, int len)
 		{
 			// $"The number columns in the row ({Columns.Count}) does not match the values ({values.Length}";
-			return String.Format("The number columns in the row ({0}) does not match the values ({1})", colCnt, len);
+			return String.Format("The number columns in the row ({0}) does not match the length of rows ({1})", colCnt,
+			                     len);
 		}
 
 		public ConsoleTable AddRow(params object[] values)

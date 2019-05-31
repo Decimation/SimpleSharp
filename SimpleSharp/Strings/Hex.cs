@@ -61,8 +61,7 @@ namespace SimpleSharp.Strings
 		public static bool TryCreateHex<T>(T value, out string s, FormatOptions options = DEFAULT)
 		{
 			string str = String.Empty;
-			if (value.GetType().IsIntegerType()) {
-				long l = Int64.Parse(value.ToString());
+			if (Int64.TryParse(value.ToString(), out long l)) {
 				str = ToHexInternal(l, options);
 			}
 
