@@ -18,7 +18,13 @@ namespace SimpleSharp.Strings
 		/// </summary>
 		private const string FIXED_BUFFER_NAME = TYPE_PARAM_FMT + "e__FixedBuffer";
 
-		private const string TYPE_PARAM_FMT = "<{0}>";
+		private const char LT_CHAR = '<';
+		private const char GT_CHAR = '>';
+
+		private const string LT_STR = "<";
+		private const string GT_STR = ">";
+
+		private const string TYPE_PARAM_FMT = LT_STR + "{0}" + GT_STR;
 
 		/// <summary>
 		///     <example>
@@ -71,6 +77,14 @@ namespace SimpleSharp.Strings
 			return name;
 		}
 
+		public static string NameOfBackingField(string name)
+		{
+			if (name.Contains(BACKING_FIELD_NAME_SUFFIX)) {
+				return name.SubstringBetween(LT_STR, GT_STR);
+			}
+
+			return null;
+		}
 
 		public static string TypeNameOfFixedBuffer(string fieldName)
 		{

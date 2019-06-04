@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using SimpleSharp.Extensions;
 
@@ -61,6 +62,13 @@ namespace SimpleSharp.Strings
 		public static bool TryCreateHex<T>(T value, out string s, FormatOptions options = DEFAULT)
 		{
 			string str = String.Empty;
+
+			if (value is Pointer) {
+				var ptr = Pointer.Unbox(value);
+				s = ToHex(ptr);
+				return true;
+			}
+
 			if (Int64.TryParse(value.ToString(), out long l)) {
 				str = ToHexInternal(l, options);
 			}
