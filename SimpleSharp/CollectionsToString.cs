@@ -133,11 +133,11 @@ namespace SimpleSharp
 			return options.HasFlagFast(FormatOptions.HEX) ? Hex.TryCreateHex(value, options) : value.ToString();
 		}
 
-		public static string CreateString(IEnumerable value, FormatOptions options)
+		private static string CreateString(IEnumerable value, FormatOptions options)
 			=> CreateString(value, StringConstants.JOIN_COMMA, options);
 
 		// todo: WIP
-		public static string CreateString(IEnumerable value, string delim, FormatOptions options)
+		private static string CreateString(IEnumerable value, string delim, FormatOptions options)
 		{
 			// Ignore strings
 			if (value is string s) {
@@ -147,13 +147,20 @@ namespace SimpleSharp
 			var sb = new StringBuilder();
 
 			foreach (var element in value) {
-				if (element.GetType().IsEnumerableType()) {
+				var elemType = element.GetType();
+				if (elemType.IsEnumerableType()) {
 					var    elemObj = (IEnumerable) element;
 					string elemStr = CreateString(elemObj, delim, options);
 
-					sb.Append('[')
-					  .Append(elemStr)
-					  .Append(']');
+					if (elemType != typeof(string)) {
+						sb.Append('[')
+						  .Append(elemStr)
+						  .Append(']');
+					}
+					else {
+						sb.Append(elemStr);
+					}
+					
 				}
 				else {
 					sb.Append(CreateStringElement(element, options));
