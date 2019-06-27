@@ -5,7 +5,7 @@ using SimpleSharp.Extensions;
 
 namespace SimpleSharp.Strings
 {
-	public static class Formatting
+	public static class SystemFormatting
 	{
 		private const string SYSTEM_NAMESPACE = "System.";
 

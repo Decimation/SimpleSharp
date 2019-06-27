@@ -56,7 +56,8 @@
     <Compile Include="Extensions\TypeExt.cs" />
     <Compile Include="FormatOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Strings\Formatting.cs" />
+    <Compile Include="Strings\FormatUtils.cs" />
+    <Compile Include="Strings\SystemFormatting.cs" />
     <Compile Include="Strings\Hex.cs" />
     <Compile Include="Strings\LevenshteinDistance.cs" />
     <Compile Include="Strings\StringConstants.cs" />

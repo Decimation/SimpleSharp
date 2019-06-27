@@ -43,7 +43,7 @@ namespace SimpleSharp
 			=> CreateString(value, options);
 
 		public static string AutoJoin(this IEnumerable value, string delim,
-		                              FormatOptions  options = FormatOptions.NONE)
+		                              FormatOptions    options = FormatOptions.NONE)
 			=> CreateString(value, delim, options);
 
 		#endregion
@@ -143,7 +143,7 @@ namespace SimpleSharp
 			if (value is string s) {
 				return s;
 			}
-			
+
 			var sb = new StringBuilder();
 
 			foreach (var element in value) {
@@ -160,7 +160,6 @@ namespace SimpleSharp
 					else {
 						sb.Append(elemStr);
 					}
-					
 				}
 				else {
 					sb.Append(CreateStringElement(element, options));
@@ -177,8 +176,21 @@ namespace SimpleSharp
 
 		private static string CreateFormatString(string formatString)
 		{
-			const string FMT = "{0}";
-			return String.IsNullOrWhiteSpace(formatString) ? FMT : formatString;
+			const char   LB      = '{';
+			const char   RB      = '}';
+			const string FMT_ARG = "0:";
+			const string DEF_FMT = "{0}";
+
+			if (String.IsNullOrWhiteSpace(formatString)) {
+				formatString = DEF_FMT;
+				return formatString;
+			}
+
+			if (!(formatString.First() == LB && formatString.Last() == RB)) {
+				formatString = LB + FMT_ARG + formatString + RB;
+			}
+
+			return formatString;
 		}
 	}
 }
