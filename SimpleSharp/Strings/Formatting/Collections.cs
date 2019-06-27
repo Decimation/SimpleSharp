@@ -6,19 +6,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SimpleSharp.Extensions;
-using SimpleSharp.Strings;
 
 #endregion
 
 // ReSharper disable UnusedMember.Local
 // ReSharper disable UnusedMember.Global
 
-namespace SimpleSharp
+namespace SimpleSharp.Strings.Formatting
 {
 	/// <summary>
 	/// Provides utilities to create <see cref="string"/> representations of collection types.
 	/// </summary>
-	public static partial class Collections
+	public static class Collections
 	{
 		public delegate string ToString<in T>(T value);
 
@@ -36,14 +35,39 @@ namespace SimpleSharp
 
 		#region Auto
 
-		public static string AutoJoin(this IEnumerable<byte> value, FormatOptions options = FormatOptions.HEX)
+		/// <summary>
+		/// Creates a <see cref="string"/> representation of an <see cref="IEnumerable{T}"/>.
+		/// <remarks>
+		/// <seealso cref="string.Join{T}"/>
+		/// </remarks>
+		/// </summary>
+		/// <param name="value">Collection</param>
+		/// <param name="options"><see cref="HexOptions"/> if the <see cref="IEnumerable{T}"/> is a collection of numbers.</param>
+		public static string AutoJoin(this IEnumerable<byte> value, HexOptions options = HexOptions.HEX)
 			=> CreateString(value, options);
 
-		public static string AutoJoin(this IEnumerable value, FormatOptions options = FormatOptions.NONE)
+		/// <summary>
+		/// Creates a <see cref="string"/> representation of an <see cref="IEnumerable{T}"/>.
+		/// <remarks>
+		/// <seealso cref="string.Join{T}"/>
+		/// </remarks>
+		/// </summary>
+		/// <param name="value">Collection</param>
+		/// <param name="options"><see cref="HexOptions"/> if the <see cref="IEnumerable{T}"/> is a collection of numbers.</param>
+		public static string AutoJoin(this IEnumerable value, HexOptions options = HexOptions.NONE)
 			=> CreateString(value, options);
 
+		/// <summary>
+		/// Creates a <see cref="string"/> representation of an <see cref="IEnumerable{T}"/>.
+		/// <remarks>
+		/// <seealso cref="string.Join{T}"/>
+		/// </remarks>
+		/// </summary>
+		/// <param name="value">Collection</param>
+		/// <param name="delim">Delimiter</param>
+		/// <param name="options"><see cref="HexOptions"/> if the <see cref="IEnumerable{T}"/> is a collection of numbers.</param>
 		public static string AutoJoin(this IEnumerable value, string delim,
-		                              FormatOptions    options = FormatOptions.NONE)
+		                              HexOptions    options = HexOptions.NONE)
 			=> CreateString(value, delim, options);
 
 		#endregion
@@ -85,7 +109,7 @@ namespace SimpleSharp
 		private static string FormatJoinInternal<T>(IEnumerable<T>  list,      string delim,
 		                                            IFormatProvider formatter, string format)
 		{
-			format = CreateFormatString(format);
+			format = FormatUtils.CreateFormatString(format);
 
 			Func<T, string> func;
 
@@ -128,16 +152,16 @@ namespace SimpleSharp
 
 		#region CreateString
 
-		private static string CreateStringElement(object value, FormatOptions options)
+		private static string CreateStringElement(object value, HexOptions options)
 		{
-			return options.HasFlagFast(FormatOptions.HEX) ? Hex.TryCreateHex(value, options) : value.ToString();
+			return options.HasFlagFast(HexOptions.HEX) ? Hex.TryCreateHex(value, options) : value.ToString();
 		}
 
-		private static string CreateString(IEnumerable value, FormatOptions options)
+		private static string CreateString(IEnumerable value, HexOptions options)
 			=> CreateString(value, StringConstants.JOIN_COMMA, options);
 
 		// todo: WIP
-		private static string CreateString(IEnumerable value, string delim, FormatOptions options)
+		private static string CreateString(IEnumerable value, string delim, HexOptions options)
 		{
 			// Ignore strings
 			if (value is string s) {
@@ -172,25 +196,6 @@ namespace SimpleSharp
 		}
 
 		#endregion
-
-
-		private static string CreateFormatString(string formatString)
-		{
-			const char   LB      = '{';
-			const char   RB      = '}';
-			const string FMT_ARG = "0:";
-			const string DEF_FMT = "{0}";
-
-			if (String.IsNullOrWhiteSpace(formatString)) {
-				formatString = DEF_FMT;
-				return formatString;
-			}
-
-			if (!(formatString.First() == LB && formatString.Last() == RB)) {
-				formatString = LB + FMT_ARG + formatString + RB;
-			}
-
-			return formatString;
-		}
+		
 	}
 }

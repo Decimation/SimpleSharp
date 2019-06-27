@@ -1,12 +1,9 @@
 using System;
-using SimpleSharp.Strings;
 
-namespace SimpleSharp
+namespace SimpleSharp.Strings.Formatting
 {
-	// todo: this is really just HexOptions
-	
 	[Flags]
-	public enum FormatOptions
+	public enum HexOptions
 	{
 		NONE = 1,
 

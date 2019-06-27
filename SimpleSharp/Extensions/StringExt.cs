@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using SimpleSharp.Strings.Formatting;
 
 // ReSharper disable UnusedMember.Global
 

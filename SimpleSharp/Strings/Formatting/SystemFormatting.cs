@@ -3,7 +3,7 @@ using SimpleSharp.Extensions;
 
 // ReSharper disable UnusedMember.Global
 
-namespace SimpleSharp.Strings
+namespace SimpleSharp.Strings.Formatting
 {
 	public static class SystemFormatting
 	{
@@ -17,9 +17,6 @@ namespace SimpleSharp.Strings
 		///     </example>
 		/// </summary>
 		private const string FIXED_BUFFER_NAME = TYPE_PARAM_FMT + "e__FixedBuffer";
-
-		private const char LT_CHAR = '<';
-		private const char GT_CHAR = '>';
 
 		private const string LT_STR = "<";
 		private const string GT_STR = ">";
