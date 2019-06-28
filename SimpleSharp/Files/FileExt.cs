@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace SimpleSharp.Extensions
+namespace SimpleSharp.Files
 {
 	/// <summary>
 	/// Extensions for <see cref="FileInfo"/>

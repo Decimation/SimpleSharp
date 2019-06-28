@@ -5,7 +5,7 @@ using System.Linq;
 
 // ReSharper disable UnusedMember.Global
 
-namespace SimpleSharp.Utilities
+namespace SimpleSharp.Files
 {
 	/// <summary>
 	/// Provides utilities for working with <see cref="FileSystemInfo"/>-related types

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using JetBrains.Annotations;
 using SimpleSharp.Extensions;
+using SimpleSharp.Strings;
 
 #endregion
 

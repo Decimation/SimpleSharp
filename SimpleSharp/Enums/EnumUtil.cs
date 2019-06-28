@@ -1,12 +1,11 @@
 using System;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using SimpleSharp.Extensions;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable MemberCanBePrivate.Global
 
-namespace SimpleSharp.Utilities
+namespace SimpleSharp.Enums
 {
 	/// <summary>
 	/// Provides utilities for working with <c>enum</c>s

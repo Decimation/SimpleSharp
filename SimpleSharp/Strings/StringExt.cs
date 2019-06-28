@@ -5,7 +5,7 @@ using SimpleSharp.Strings.Formatting;
 
 // ReSharper disable UnusedMember.Global
 
-namespace SimpleSharp.Extensions
+namespace SimpleSharp.Strings
 {
 	/// <summary>
 	/// Extensions for <see cref="string"/>s

@@ -10,13 +10,12 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using SimpleSharp.Extensions;
-using SimpleSharp.Strings;
 
 // ReSharper disable UnusedMember.Global
 
 #endregion
 
-namespace SimpleSharp.Utilities
+namespace SimpleSharp.Strings
 {
 	/// <summary>
 	/// Provides utilities for working with <see cref="string"/>s
@@ -153,14 +152,14 @@ namespace SimpleSharp.Utilities
 		{
 			// Align newlines on the same column
 
-			string[] nl = formatted.Split(new[] {"\n"}, StringSplitOptions.None);
+			string[] nl = formatted.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
 
 			var postString = new StringBuilder();
 			postString.Append(nl[0]);
 
 			for (int i = 1; i < nl.Length; i++) {
 				string pad = new string(' ', length);
-				postString.AppendFormat("{0}{1}", '\n' + pad, nl[i]);
+				postString.AppendFormat("{0}{1}", Environment.NewLine + pad, nl[i]);
 			}
 
 			return postString.ToString();

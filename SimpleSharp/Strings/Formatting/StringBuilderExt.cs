@@ -2,7 +2,7 @@
 
 // ReSharper disable UnusedMember.Global
 
-namespace SimpleSharp.Extensions
+namespace SimpleSharp.Strings.Formatting
 {
 	/// <summary>
 	/// Extensions for <see cref="StringBuilder"/>s

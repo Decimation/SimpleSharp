@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SimpleSharp.Strings;
 
-namespace SimpleSharp.Extensions
+namespace SimpleSharp.Enums
 {
 	/// <summary>
 	/// Extensions for <c>enum</c>s
