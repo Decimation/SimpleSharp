@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 // ReSharper disable UnusedMember.Global
 
-namespace SimpleSharp.Extensions
+namespace SimpleSharp.Utilities
 {
 	/// <summary>
 	/// Extensions for <see cref="IEnumerable{T}"/>

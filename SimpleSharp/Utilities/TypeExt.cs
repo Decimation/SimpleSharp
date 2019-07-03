@@ -5,7 +5,7 @@ using System.Collections;
 
 // ReSharper disable UnusedMember.Global
 
-namespace SimpleSharp.Extensions
+namespace SimpleSharp.Utilities
 {
 	/// <summary>
 	/// Extensions for <see cref="Type"/>s

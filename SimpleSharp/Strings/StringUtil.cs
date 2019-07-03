@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using SimpleSharp.Extensions;
+using SimpleSharp.Utilities;
 
 // ReSharper disable UnusedMember.Global
 
