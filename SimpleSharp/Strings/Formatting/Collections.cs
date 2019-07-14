@@ -67,7 +67,7 @@ namespace SimpleSharp.Strings.Formatting
 		/// <param name="delim">Delimiter</param>
 		/// <param name="options"><see cref="HexOptions"/> if the <see cref="IEnumerable{T}"/> is a collection of numbers.</param>
 		public static string AutoJoin(this IEnumerable value, string delim,
-		                              HexOptions    options = HexOptions.NONE)
+		                              HexOptions       options = HexOptions.NONE)
 			=> CreateString(value, delim, options);
 
 		#endregion
@@ -133,6 +133,9 @@ namespace SimpleSharp.Strings.Formatting
 		public static string FormatJoin<T>(this IEnumerable<T> list, string delim, string format)
 			=> FormatJoinInternal(list, delim, null, format);
 
+		public static string FormatJoin<T>(this IEnumerable<T> list, string format)
+			=> FormatJoinInternal(list, StringConstants.JOIN_COMMA, null, format);
+
 		/// <summary>
 		/// Extended <see cref="String.Join{T}(string,IEnumerable{T})"/>
 		/// </summary>
@@ -144,6 +147,9 @@ namespace SimpleSharp.Strings.Formatting
 		public static string FormatJoin<T>(this IEnumerable<T> list,      string delim,
 		                                   IFormatProvider     formatter, string format)
 			=> FormatJoinInternal(list, delim, formatter, format);
+
+		public static string FormatJoin<T>(this IEnumerable<T> list, IFormatProvider formatter, string format)
+			=> FormatJoinInternal(list, StringConstants.JOIN_COMMA, formatter, format);
 
 		#endregion
 
@@ -196,6 +202,5 @@ namespace SimpleSharp.Strings.Formatting
 		}
 
 		#endregion
-		
 	}
 }
