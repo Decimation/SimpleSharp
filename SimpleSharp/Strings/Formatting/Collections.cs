@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SimpleSharp.Enums;
 using SimpleSharp.Utilities;
 
 #endregion
@@ -22,6 +23,16 @@ namespace SimpleSharp.Strings.Formatting
 		public delegate string ToString<in T>(T value);
 
 		#region Join
+
+		#region Simple
+
+		public static string SimpleJoin<T>(this IEnumerable<T> value, string delim) 
+			=> String.Join(delim, value);
+
+		public static string SimpleJoin<T>(this IEnumerable<T> value) 
+			=> value.SimpleJoin(StringConstants.JOIN_COMMA);
+
+		#endregion
 
 		#region Quick
 

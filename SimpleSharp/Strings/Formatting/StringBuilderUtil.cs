@@ -7,8 +7,10 @@ namespace SimpleSharp.Strings.Formatting
 	/// <summary>
 	/// Extensions for <see cref="StringBuilder"/>s
 	/// </summary>
-	public static class StringBuilderExt
+	public static class StringBuilderUtil
 	{
+		#region Extensions
+
 		public static StringBuilder AppendLineFormat(this StringBuilder sb, string s, params object[] args)
 			=> sb.AppendFormat(s, args).AppendLine();
 
@@ -20,5 +22,7 @@ namespace SimpleSharp.Strings.Formatting
 
 			return sb;
 		}
+
+		#endregion
 	}
 }

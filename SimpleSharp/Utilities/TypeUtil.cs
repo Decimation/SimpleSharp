@@ -10,8 +10,10 @@ namespace SimpleSharp.Utilities
 	/// <summary>
 	/// Extensions for <see cref="Type"/>s
 	/// </summary>
-	public static class TypeExt
+	public static class TypeUtil
 	{
+		#region Extensions
+
 		public static bool HasInterface(this Type type, string interfaceType)
 		{
 			return type.GetInterface(interfaceType) != null;
@@ -33,5 +35,7 @@ namespace SimpleSharp.Utilities
 			// system makes no fucking sense lmao
 			return type.GenericTypeArguments.Length != 0;
 		}
+
+		#endregion
 	}
 }

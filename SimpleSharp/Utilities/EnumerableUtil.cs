@@ -11,8 +11,10 @@ namespace SimpleSharp.Utilities
 	/// <summary>
 	/// Extensions for <see cref="IEnumerable{T}"/>
 	/// </summary>
-	public static class EnumerableExt
+	public static class EnumerableUtil
 	{
+		#region Extensions
+
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool IsOutOfBounds<T>(this IList<T> list, int index)
 			=> index >= list.Count || index < 0;
@@ -25,7 +27,7 @@ namespace SimpleSharp.Utilities
 		}*/
 
 		public static T Random<T>(this IEnumerable<T> ls) => Arrays.Random(ls.ToArray());
-		
+
 		/// <summary>
 		/// Removes all values from <paramref name="list"/> specified by the indices in <paramref name="indexes"/>
 		/// </summary>
@@ -110,5 +112,7 @@ namespace SimpleSharp.Utilities
 				}
 			}
 		}
+
+		#endregion
 	}
 }

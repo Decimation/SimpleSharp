@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using SimpleSharp.Enums;
 
 // ReSharper disable UnusedMember.Global
 

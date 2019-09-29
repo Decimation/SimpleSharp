@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using SimpleSharp.Strings;
+using SimpleSharp.Strings.Formatting;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable MemberCanBePrivate.Global
@@ -118,5 +121,27 @@ namespace SimpleSharp.Enums
 		{
 			return (T) Enum.GetValues(typeof(T)).GetValue(i);
 		}
+
+		#region Extensions
+
+		public static IEnumerable<Enum> GetFlags(this Enum value)
+		{
+			return Enum.GetValues(value.GetType())
+			           .Cast<Enum>()
+			           .Where(value.HasFlag)
+			           .Distinct();
+		}
+
+		public static string JoinFlags(this Enum value, string delim = StringConstants.JOIN_COMMA)
+			=> String.Join(delim, value.GetFlags());
+		
+		public static bool HasFlagFast(this HexOptions value, HexOptions flag)
+		{
+			//return value.HasFlag(flag);
+			//if ((testItem & FlagTest.Flag1) == FlagTest.Flag1)
+			return ((value & flag) == flag);
+		}
+
+		#endregion
 	}
 }
