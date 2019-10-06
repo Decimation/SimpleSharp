@@ -20,8 +20,24 @@ namespace SimpleSharp.Strings
 	/// <summary>
 	/// Provides utilities for working with <see cref="string"/>s
 	/// </summary>
-	public static class StringUtil
+	public static class Strings
 	{
+		#region StringBuilder extensions
+
+		public static StringBuilder AppendLineFormat(this StringBuilder sb, string s, params object[] args)
+			=> sb.AppendFormat(s, args).AppendLine();
+
+		public static StringBuilder RemoveTrailingDelimeter(this StringBuilder sb, string delim)
+		{
+			if (sb.Length > 0) {
+				sb.Remove(sb.Length - delim.Length, delim.Length);
+			}
+
+			return sb;
+		}
+
+		#endregion
+
 		/// <summary>
 		///     Converts the boolean <paramref name="b" /> to a <see cref="char" /> representation.
 		/// </summary>
@@ -93,11 +109,10 @@ namespace SimpleSharp.Strings
 
 			string[] strByteArr   = szPattern.Split(' ');
 			var      patternBytes = new byte[strByteArr.Length];
-			
+
 			for (int i = 0; i < strByteArr.Length; i++) {
-				
-				patternBytes[i] = strByteArr[i] == "?" 
-					? (byte) 0x0 
+				patternBytes[i] = strByteArr[i] == "?"
+					? (byte) 0x0
 					: Byte.Parse(strByteArr[i], NumberStyles.HexNumber);
 			}
 
@@ -130,7 +145,7 @@ namespace SimpleSharp.Strings
 		public static string Subscript(int i)
 		{
 			var sb = new StringBuilder();
-			foreach (char v in i.ToString()) 
+			foreach (char v in i.ToString())
 				sb.Append((char) ('\u2080' + (v - '0')));
 
 			return sb.ToString();
@@ -139,12 +154,12 @@ namespace SimpleSharp.Strings
 		public static string Random(int len)
 		{
 			var sb = new StringBuilder();
-			for (int i = 0; i < len; i++) 
+			for (int i = 0; i < len; i++)
 				sb.Append((StringConstants.ALPHANUMERICS.ToCharArray()).Random());
 
 			return sb.ToString();
 		}
-		
+
 		/// <summary>
 		///     Aligns subsequent newlines directly under the string before the newlines.
 		/// </summary>
@@ -172,7 +187,7 @@ namespace SimpleSharp.Strings
 
 		#region Extensions
 
-/// <summary>
+		/// <summary>
 		/// Replaces occurrences of <paramref name="oldValue"/> with <see cref="String.Empty"/>
 		/// </summary>
 		public static string Erase(this string s, string oldValue)
@@ -246,7 +261,6 @@ namespace SimpleSharp.Strings
 		{
 			return String.IsInterned(text) != null;
 		}
-		
 
 		#endregion
 	}

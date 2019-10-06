@@ -11,7 +11,7 @@ namespace SimpleSharp.Utilities
 	/// <summary>
 	/// Extensions for <see cref="IEnumerable{T}"/>
 	/// </summary>
-	public static class EnumerableUtil
+	public static class Enumerables
 	{
 		#region Extensions
 

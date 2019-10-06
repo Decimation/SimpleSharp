@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace SimpleSharp.Utilities
 {
-	public static class TaskUtil
+	public static class Tasks
 	{
 		private static readonly Exception Timeout = new TimeoutException();
 		

@@ -43,26 +43,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Arrays.cs" />
     <Compile Include="ConsoleTable.cs" />
     <Compile Include="Diagnostics\Conditions.cs" />
-    <Compile Include="Enums\EnumUtil.cs" />
-    <Compile Include="Files\FileUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strings\Formatting\Collections.cs" />
-    <Compile Include="Strings\Formatting\FormatUtils.cs" />
+    <Compile Include="Strings\Formatting\Formatting.cs" />
     <Compile Include="Strings\Formatting\Hex.cs" />
     <Compile Include="Strings\Formatting\HexOptions.cs" />
-    <Compile Include="Strings\Formatting\StringBuilderUtil.cs" />
     <Compile Include="Strings\Formatting\SystemFormatting.cs" />
     <Compile Include="Strings\LevenshteinDistance.cs" />
     <Compile Include="Strings\StringConstants.cs" />
-    <Compile Include="Strings\StringUtil.cs" />
+    <Compile Include="Strings\Strings.cs" />
     <Compile Include="ThreadLocalRandom.cs" />
+    <Compile Include="Utilities\Arrays.cs" />
     <Compile Include="Utilities\Common.cs" />
-    <Compile Include="Utilities\EnumerableUtil.cs" />
-    <Compile Include="Utilities\TaskUtil.cs" />
-    <Compile Include="Utilities\TypeUtil.cs" />
+    <Compile Include="Utilities\Enumerables.cs" />
+    <Compile Include="Utilities\Enums.cs" />
+    <Compile Include="Utilities\Files.cs" />
+    <Compile Include="Utilities\Tasks.cs" />
+    <Compile Include="Utilities\Types.cs" />
     <Compile Include="VirtualCollection.cs" />
   </ItemGroup>
   <ItemGroup>

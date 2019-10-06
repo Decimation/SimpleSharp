@@ -8,12 +8,12 @@ using SimpleSharp.Strings.Formatting;
 // ReSharper disable UnusedMember.Global
 // ReSharper disable MemberCanBePrivate.Global
 
-namespace SimpleSharp.Enums
+namespace SimpleSharp.Utilities
 {
 	/// <summary>
 	/// Provides utilities for working with <c>enum</c>s
 	/// </summary>
-	public static class EnumUtil
+	public static class Enums
 	{
 		// todo: rewrite this util class
 
@@ -134,7 +134,7 @@ namespace SimpleSharp.Enums
 
 		public static string JoinFlags(this Enum value, string delim = StringConstants.JOIN_COMMA)
 			=> String.Join(delim, value.GetFlags());
-		
+
 		public static bool HasFlagFast(this HexOptions value, HexOptions flag)
 		{
 			//return value.HasFlag(flag);

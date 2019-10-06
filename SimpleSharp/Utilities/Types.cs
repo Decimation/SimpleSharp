@@ -10,7 +10,7 @@ namespace SimpleSharp.Utilities
 	/// <summary>
 	/// Extensions for <see cref="Type"/>s
 	/// </summary>
-	public static class TypeUtil
+	public static class Types
 	{
 		#region Extensions
 

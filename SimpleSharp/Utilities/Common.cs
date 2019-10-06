@@ -39,8 +39,8 @@ namespace SimpleSharp.Utilities
 
 			return process;
 		}
-		
-		internal static bool IsAdministrator()
+
+		public static bool IsAdministrator()
 		{
 			return (new WindowsPrincipal(WindowsIdentity.GetCurrent())).IsInRole(WindowsBuiltInRole.Administrator);
 		}  

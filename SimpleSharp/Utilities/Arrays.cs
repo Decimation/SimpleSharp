@@ -4,7 +4,7 @@ using System.Linq;
 
 // ReSharper disable ParameterTypeCanBeEnumerable.Global
 
-namespace SimpleSharp
+namespace SimpleSharp.Utilities
 {
 	public static class Arrays
 	{
@@ -32,7 +32,7 @@ namespace SimpleSharp
 		/// Runs the <see cref="Action{T}"/> specified by <paramref name="fn"/> on <paramref name="arr"/>
 		/// while it is a <see cref="List{T}"/>
 		/// </summary>
-		public static T[] TransientOperate<T>(T[] arr, Action<List<T>> fn)
+		public static T[] RunAsList<T>(T[] arr, Action<List<T>> fn)
 		{
 			List<T> list = arr.ToList();
 			fn(list);
@@ -42,17 +42,17 @@ namespace SimpleSharp
 		
 		public static T[] RemoveAt<T>(T[] arr, int index)
 		{
-			return TransientOperate(arr, x => x.RemoveAt(index));
+			return RunAsList(arr, x => x.RemoveAt(index));
 		}
 
 		public static void RemoveAll<T>(ref T[] arr, Predicate<T> match)
 		{
-			arr = TransientOperate(arr, x => x.RemoveAll(match));
+			arr = RunAsList(arr, x => x.RemoveAll(match));
 		}
 
 		public static T[] Insert<T>(T[] arr, int index, T val)
 		{
-			return TransientOperate(arr, list =>
+			return RunAsList(arr, list =>
 			{
 				list.AddRange(arr);
 				list.Insert(index, val);

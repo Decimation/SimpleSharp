@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace SimpleSharp.Strings.Formatting
 {
-	public static class FormatUtils
+	public static class Formatting
 	{
 		private const char LB = '{';
 		private const char RB = '}';

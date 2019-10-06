@@ -5,7 +5,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SimpleSharp.Enums;
 using SimpleSharp.Utilities;
 
 #endregion
@@ -120,7 +119,7 @@ namespace SimpleSharp.Strings.Formatting
 		private static string FormatJoinInternal<T>(IEnumerable<T>  list,      string delim,
 		                                            IFormatProvider formatter, string format)
 		{
-			format = FormatUtils.CreateFormatString(format);
+			format = Formatting.CreateFormatString(format);
 
 			Func<T, string> func;
 
